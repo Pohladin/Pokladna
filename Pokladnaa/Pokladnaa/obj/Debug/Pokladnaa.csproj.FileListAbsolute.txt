@@ -1,0 +1,13 @@
+D:\online programko\Pokladnaa\Pokladnaa\bin\Debug\Pokladnaa.exe.config
+D:\online programko\Pokladnaa\Pokladnaa\bin\Debug\Pokladnaa.exe
+D:\online programko\Pokladnaa\Pokladnaa\bin\Debug\Pokladnaa.pdb
+D:\online programko\Pokladnaa\Pokladnaa\bin\Debug\Newtonsoft.Json.dll
+D:\online programko\Pokladnaa\Pokladnaa\bin\Debug\Newtonsoft.Json.xml
+D:\online programko\Pokladnaa\Pokladnaa\obj\Debug\Pokladnaa.csprojAssemblyReference.cache
+D:\online programko\Pokladnaa\Pokladnaa\obj\Debug\Pokladnaa.Form1.resources
+D:\online programko\Pokladnaa\Pokladnaa\obj\Debug\Pokladnaa.Properties.Resources.resources
+D:\online programko\Pokladnaa\Pokladnaa\obj\Debug\Pokladnaa.csproj.GenerateResource.cache
+D:\online programko\Pokladnaa\Pokladnaa\obj\Debug\Pokladnaa.csproj.CoreCompileInputs.cache
+D:\online programko\Pokladnaa\Pokladnaa\obj\Debug\Pokladnaa.csproj.CopyComplete
+D:\online programko\Pokladnaa\Pokladnaa\obj\Debug\Pokladnaa.exe
+D:\online programko\Pokladnaa\Pokladnaa\obj\Debug\Pokladnaa.pdb
