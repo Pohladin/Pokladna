@@ -24,7 +24,7 @@ namespace Pokladnaa
             data.Add(new PokladniZaznam(2, 2, new DateTime(2020, 1, 4), "Tenisové míče", -2356, data.Last().Zustatek - 2356, "Dotace - MŠMI"));
             data.Add(new PokladniZaznam(3, 3, new DateTime(2020, 1, 8), "Občerstvení", -538, data.Last().Zustatek - 538, ""));
             data.Add(new PokladniZaznam(4, 4, new DateTime(2020, 1, 10), "Pronájem kurtu", 350 , data.Last().Zustatek + 350, ""));
-            data.Add(new PokladniZaznam(5, 5, new DateTime(2020, 1, 22), "Registrace soutěží", -2500, data.Last().Zustatek -2500, ""));
+            data.Add(new PokladniZaznam(5, 5, new DateTime(2020, 1, 22), "Registrace soutěží", 2500, data.Last().Zustatek +2500, ""));
 
             string Json = JsonConvert.SerializeObject(data);
 
@@ -58,6 +58,13 @@ namespace Pokladnaa
         public PokladniZaznam VytvorZaznam(PokladniZaznam pokladniZaznam)
         {
             throw new NotImplementedException();
+        }
+
+        public List<PokladniZaznam> NactiMesic(int rok, int mesic)
+        {
+            List<PokladniZaznam> data = NactiVse();
+           return NactiVse().FindAll(prvek => prvek.Datum.Year == rok && prvek.Datum.Month == mesic);
+            
         }
     }
 }

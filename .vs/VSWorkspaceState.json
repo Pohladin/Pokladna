@@ -1,8 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Pokladnaa"
+    "\\Pokladnaa",
+    "\\Pokladnaa\\Pokladnaa",
+    "\\Pokladnaa\\Pokladnaa\\bin",
+    "\\Pokladnaa\\Pokladnaa\\bin\\Debug"
   ],
-  "SelectedNode": "\\Pokladnaa\\Pokladnaa.sln",
+  "SelectedNode": "\\Pokladnaa\\Pokladnaa\\Form1.cs",
   "PreviewInSolutionExplorer": false
 }
