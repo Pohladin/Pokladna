@@ -22,10 +22,10 @@ namespace Pokladnaa
         private void Form1_Load(object sender, EventArgs e)
         {
             JsonRepos jsonRepos = new JsonRepos("data.json");
-            jsonRepos.VytvorTestData();
+            //jsonRepos.VytvorTestData();
             repositar = jsonRepos;
 
-
+            
             cBoxRok.SelectedIndex = cBoxRok.Items.IndexOf(DateTime.Now.Year.ToString());
             cBoxMesic.SelectedIndex = DateTime.Now.Month - 1;
 
@@ -41,15 +41,58 @@ namespace Pokladnaa
 
         private void cBoxRok_SelectedIndexChanged(object sender, EventArgs e)
         {
+            NactiAktMesic();
+        }
+
+        private void NactiAktMesic()
+        {
             if (cBoxRok.SelectedIndex >= 0 && cBoxMesic.SelectedIndex >= 0)
             {
-                pokladna = repositar.NactiMesic(int.Parse(cBoxRok.SelectedItem.ToString()), cBoxMesic.SelectedIndex+1);
+                pokladna = repositar.NactiMesic(int.Parse(cBoxRok.SelectedItem.ToString()), cBoxMesic.SelectedIndex + 1);
                 lvData.Items.Clear();
                 foreach (var p in pokladna)
                 {
                     lvData.Items.Add(p.DoLvItem());
                 }
             }
+        }
+
+
+
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtCisloDokladu_TextChanged(object sender, EventArgs e)
+        {
+            btnUlozit.Enabled = txtCisloDokladu.Text != "";
+        }
+
+        private void txtPopis_TextChanged(object sender, EventArgs e)
+        {
+            btnUlozitJakoNovy.Enabled = txtPopis.Text.Trim() != "" && numericCastka.Value != 0;
+        }
+
+        private void numericCastka_ValueChanged(object sender, EventArgs e)
+        {
+            btnUlozitJakoNovy.Enabled = txtPopis.Text.Trim() != "" && numericCastka.Value != 0;
+        }
+
+        private void btnUlozitJakoNovy_Click(object sender, EventArgs e)
+        {
+            PokladniZaznam novyZaznam = new PokladniZaznam(dtpDatum.Value, txtPopis.Text, (double)numericCastka.Value, txtPoznamka.Text);
+            repositar.VytvorZaznam(novyZaznam);
+            NactiAktMesic();
+            txtPopis.Text = "";
+            numericCastka.Value = 0;
+            txtPoznamka.Text = "";
         }
     }
 }

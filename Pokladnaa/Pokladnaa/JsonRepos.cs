@@ -57,13 +57,73 @@ namespace Pokladnaa
 
         public PokladniZaznam VytvorZaznam(PokladniZaznam pokladniZaznam)
         {
-            throw new NotImplementedException();
+            List<PokladniZaznam> data = NactiVse();
+            if(data.Find(doklad => doklad.Datum > pokladniZaznam.Datum) == null)
+                // vkládaný záznam je poslední
+            {
+                data.Sort((a, b) => a.IdPokladniZaznam.CompareTo(b.IdPokladniZaznam));
+                pokladniZaznam.IdPokladniZaznam = data.Last().IdPokladniZaznam + 1;
+                data.Sort((a, b) => a.Datum.CompareTo(b.Datum));
+
+                if(data.Last().Datum.Month == pokladniZaznam.Datum.Month)
+                {
+                    pokladniZaznam.Cislo = data.Last().Cislo + 1;
+                }
+                else
+                {
+                    pokladniZaznam.Cislo = 1;
+                }
+                pokladniZaznam.Zustatek = data.Last().Zustatek + pokladniZaznam.Castka;
+                
+            }
+             // vkládaný záznam není poslední
+            else
+            {
+                // Id bude nejvyšší +1
+                data.Sort((a, b) => a.IdPokladniZaznam.CompareTo(b.IdPokladniZaznam));
+                pokladniZaznam.IdPokladniZaznam = data.Last().IdPokladniZaznam + 1;
+                // číslo bude o jedna vyšší než poslední ve stejném měsíci
+                List<PokladniZaznam> dataMesice = data.FindAll(doklad => doklad.Datum.Year == pokladniZaznam.Datum.Year 
+                                                                                                                     && doklad.Datum.Month == pokladniZaznam.Datum.Month);
+                dataMesice.Sort((a, b) => a.Datum.CompareTo(b.Datum));
+                if(dataMesice.Count > 0)
+                {
+                    if(dataMesice.Find(doklad => doklad.Datum > pokladniZaznam.Datum) == null)
+                        // je poslední v rámci měsíce
+                    {
+                        pokladniZaznam.Cislo = dataMesice.Last().Cislo + 1;
+                    }
+                    else
+                    {
+                        int index = dataMesice.FindIndex(doklad => doklad.Datum > pokladniZaznam.Datum);
+                        
+                            pokladniZaznam.Cislo = dataMesice[index].Cislo;
+                            for (int i = index; i < dataMesice.Count; i++)
+                            {
+                                dataMesice[i].Cislo += 1;
+                            } 
+                    }
+                    
+                }
+                else
+                {
+                    pokladniZaznam.Cislo = 1;
+                }
+                // zůstatek
+            }
+            data.Add(pokladniZaznam);
+
+            string json = JsonConvert.SerializeObject(data);
+            File.WriteAllText(datovySoubor, json);
+            return pokladniZaznam;
         }
 
         public List<PokladniZaznam> NactiMesic(int rok, int mesic)
         {
             List<PokladniZaznam> data = NactiVse();
-           return NactiVse().FindAll(prvek => prvek.Datum.Year == rok && prvek.Datum.Month == mesic);
+            data = NactiVse().FindAll(prvek => prvek.Datum.Year == rok && prvek.Datum.Month == mesic);
+            data.Sort((a, b) => a.Datum.CompareTo(b.Datum));
+            return data;
             
         }
     }
