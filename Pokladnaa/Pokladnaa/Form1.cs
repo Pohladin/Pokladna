@@ -23,7 +23,9 @@ namespace Pokladnaa
         {
             JsonRepos jsonRepos = new JsonRepos("data.json");
             //jsonRepos.VytvorTestData();
-            repositar = jsonRepos;
+            SqlRepos sqlRepos = new SqlRepos();
+            sqlRepos.VytvorTestData(jsonRepos.NactiVse());
+            repositar = sqlRepos;
 
             
             cBoxRok.SelectedIndex = cBoxRok.Items.IndexOf(DateTime.Now.Year.ToString());
@@ -41,7 +43,7 @@ namespace Pokladnaa
 
         private void cBoxRok_SelectedIndexChanged(object sender, EventArgs e)
         {
-            NactiAktMesic();
+           NactiAktMesic();
         }
 
         private void NactiAktMesic()
