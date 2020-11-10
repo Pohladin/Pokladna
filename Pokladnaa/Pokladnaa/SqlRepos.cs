@@ -14,7 +14,7 @@ namespace Pokladnaa
         private string connString = @"Data Source=DOMÁLES\SQLEXPRESS;Initial Catalog=pokladna;Integrated Security=True";
 
 
-
+        //ddd
 
         public void VytvorTestData(List<PokladniZaznam> vychoziZaznamy)
         {
