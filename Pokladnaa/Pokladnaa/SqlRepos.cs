@@ -15,6 +15,7 @@ namespace Pokladnaa
 
 
         //ddd
+        //commit
 
         public void VytvorTestData(List<PokladniZaznam> vychoziZaznamy)
         {
